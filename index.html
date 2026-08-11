@@ -4,177 +4,417 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thanh Duc Pham</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #ffffff;
+      color: #222;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       font-size: 16px;
-      line-height: 1.7;
-      color: #3d4144;
-      background: #fff;
+      line-height: 1.65;
     }
 
-    a { color: #52adc8; text-decoration: none; }
+    a { color: #2563eb; text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    .wrapper {
-      max-width: 1000px;
+    /* ── Top bar ────────────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2.5rem;
+      height: 52px;
+    }
+
+    .social-icons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .social-icons a {
+      color: #444;
+      font-size: 1.1rem;
+      transition: color 0.15s;
+    }
+    .social-icons a:hover { color: #2563eb; text-decoration: none; }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+    }
+
+    nav a {
+      color: #444;
+      font-size: 0.92rem;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    nav a:hover, nav a.active { color: #2563eb; text-decoration: none; }
+
+    /* ── Main layout ─────────────────────────────────────────── */
+    main {
+      max-width: 860px;
       margin: 0 auto;
-      padding: 2.5rem 1.5rem;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    /* ── About section ───────────────────────────────────────── */
+    #about { margin-bottom: 3rem; }
+
+    .about-grid {
       display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 3rem;
+      grid-template-columns: 1fr 200px;
+      gap: 2.5rem;
+      align-items: start;
     }
 
-    /* ── Sidebar ── */
-    .sidebar { font-size: 0.9rem; }
+    .about-text p { margin-bottom: 0.85rem; }
 
-    .sidebar img {
-      width: 175px;
-      border-radius: 50%;
-      display: block;
-      margin-bottom: 0.8rem;
+    .profile-photo {
+      width: 200px;
+      height: 240px;
+      border-radius: 6px;
+      overflow: hidden;
+      background: #f3f4f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
 
-    .sidebar h1 {
-      font-size: 1.2rem;
+    .profile-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── Section headings ─────────────────────────────────────── */
+    section { margin-bottom: 3rem; }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    /* ── News table ───────────────────────────────────────────── */
+    .news-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .news-table tr { border-bottom: 1px solid #f3f4f6; }
+    .news-table tr:last-child { border-bottom: none; }
+
+    .news-table td {
+      padding: 0.6rem 0.5rem;
+      vertical-align: top;
+    }
+
+    .news-table td:first-child {
+      white-space: nowrap;
+      font-weight: 600;
+      font-size: 0.88rem;
+      color: #555;
+      padding-right: 1.5rem;
+      min-width: 110px;
+    }
+
+    /* ── Publications ─────────────────────────────────────────── */
+    .pub-list { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .pub-item {
+      padding: 1.1rem 1.2rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .pub-venue {
+      display: inline-block;
+      font-size: 0.78rem;
       font-weight: 700;
-      color: #222;
-      margin-bottom: 0.15rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #fff;
+      background: #2563eb;
+      border-radius: 4px;
+      padding: 0.15rem 0.55rem;
+      margin-bottom: 0.5rem;
     }
 
-    .sidebar .role { color: #777; margin-bottom: 0.9rem; }
+    .pub-venue.preprint { background: #6b7280; }
 
-    .sidebar ul { list-style: none; }
-    .sidebar li { margin-bottom: 0.4rem; color: #555; }
-    .sidebar li i { width: 1.2rem; }
-
-    /* ── Content ── */
-    .content h2 {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: #222;
-      margin: 2rem 0 0.8rem;
-      padding-bottom: 0.3rem;
-      border-bottom: 1px solid #eee;
-    }
-    .content h2:first-child { margin-top: 0; }
-
-    .content p { margin-bottom: 0.9rem; }
-
-    .news { list-style: none; }
-    .news li { margin-bottom: 0.5rem; }
-
-    .pub { margin-bottom: 1.2rem; }
-    .pub .title { font-weight: 700; }
-    .pub .venue { color: #777; font-size: 0.92rem; }
-    .pub .authors { font-size: 0.95rem; font-style: italic; }
-    .pub .authors b { font-style: normal; }
-
-    footer {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 1.5rem;
-      border-top: 1px solid #eee;
-      font-size: 0.85rem;
-      color: #999;
+    .pub-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
     }
 
-    @media (max-width: 700px) {
-      .wrapper { grid-template-columns: 1fr; gap: 1.5rem; }
+    .pub-authors {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 0.25rem;
+    }
+
+    .pub-authors strong { color: #222; }
+
+    .pub-conference {
+      font-size: 0.88rem;
+      color: #666;
+      font-style: italic;
+      margin-bottom: 0.5rem;
+    }
+
+    .pub-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+    .pub-link {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #2563eb;
+      border: 1px solid #bfdbfe;
+      border-radius: 4px;
+      padding: 0.15rem 0.6rem;
+      transition: background 0.15s, color 0.15s;
+    }
+    .pub-link:hover { background: #2563eb; color: #fff; text-decoration: none; }
+
+    /* ── Hero banner ──────────────────────────────────────────── */
+    .hero {
+      width: 100%;
+      height: 340px;
+      background: url('bg.jpg') center center / cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding: 2rem 2.5rem;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+    }
+
+    .hero-name {
+      position: relative;
+      z-index: 1;
+      color: #fff;
+      font-size: 2.6rem;
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .hero-name strong { font-weight: 700; }
+
+    /* ── Responsive ───────────────────────────────────────────── */
+    @media (max-width: 620px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .profile-photo { width: 140px; height: 170px; }
+      header { padding: 0 1rem; }
+      main { padding: 2rem 1rem 3rem; }
+      .hero { height: 220px; padding: 1.2rem 1rem; }
+      .hero-name { font-size: 1.8rem; }
     }
   </style>
 </head>
 <body>
 
-<div class="wrapper">
+<!-- ── Header ──────────────────────────────────────────────── -->
+<header>
+  <div class="social-icons">
+    <a href="mailto:thanhph29.re@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+    <a href="https://github.com/pdt0609" title="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+    <a href="#" title="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+    <a href="https://scholar.google.com/citations?user=tK-CUboAAAAJ&hl=en" title="Google Scholar" target="_blank" rel="noopener"><i class="fa-solid fa-graduation-cap"></i></a>
+    <a href="#" title="X / Twitter" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
+  </div>
+  <nav>
+    <a href="#about" class="active">About</a>
+    <a href="#news">News</a>
+    <a href="#publications">Publications</a>
+    <a href="my_CV.pdf" title="CV" target="_blank" rel="noopener">CV</a>
+  </nav>
+</header>
 
-  <!-- ── Sidebar ── -->
-  <!-- ── Sidebar ── -->
-  <aside class="sidebar">
-    <img src="avatar.jpg" alt="Thanh Duc Pham" class="avatar" />
-    <h1>Thanh Duc Pham</h1>
-    <p class="role">AI Research Resident at FPT Software AI Center</p>
-    <ul>
-      <li>&#128205; Hanoi, Vietnam</li>
-      <li><a href="mailto:phamthanh060903@gmail.com">Email</a></li>
-      <li><a href="https://github.com/pdt0609" target="_blank" rel="noopener">GitHub</a></li>
-      <li><a href="https://scholar.google.com/citations?user=tK-CUboAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
-      <li><a href="my_CV.pdf" target="_blank" rel="noopener">CV</a></li>
-    </ul>
-  </aside>
-
-  <!-- ── Content ── -->
-  <main class="content">
-
-    <h2>About</h2>
-    <p>
-      Welcome to my homepage! My full name is Thanh Duc Pham 👋. I am currently an AI Research Resident at
-      <a href="https://www.facebook.com/aic.fsoft" target="_blank" rel="noopener">FPT Software AI Center</a>,
-      where I have the privilege of being advised by Prof.
-      <a href="https://scholar.google.com/citations?user=mnNKKlAAAAAJ&hl=fr" target="_blank" rel="noopener">Minh-Tan Pham</a>
-      (IRISA, Université Bretagne Sud). Previously, I was a Research Assistant at the Data Science Laboratory
-      (BKAI), advised by Prof.
-      <a href="https://users.soict.hust.edu.vn/linhnv/" target="_blank" rel="noopener">Linh Ngo Van</a>.
-      I earned my Bachelor's degree in Data Science and Artificial Intelligence from
-      <a href="https://hust.edu.vn/" target="_blank" rel="noopener">Hanoi University of Science and Technology</a>.
-    </p>
-    <p>Email: thanhph29.re@gmail.com</p>
-
-    <h2>Research Interests</h2>
-    <p>
-      My research focuses on developing principled approaches that enable AI systems to learn and adapt
-      continuously and efficiently. I am particularly interested in DETR-based detection and segmentation
-      models, Knowledge Distillation, Neural Collapse, and Continual Learning, and I am excited to explore
-      related directions that enhance the adaptability and practical impact of modern vision models.
-    </p>
-    <p>
-      I'm actively seeking graduate (MSc/PhD) positions for the upcoming academic year and excited to
-      collaborate on impactful research! 🚀
-    </p>
-
-    <h2>Recent News</h2>
-    <ul class="news">
-      <li><b>[Aug 2026]</b> <a href="https://arxiv.org/pdf/2608.02468" target="_blank" rel="noopener">ISRS-DETR: Detection-Guided Click Propagation for Remote Sensing Interactive Segmentation</a> preprint is out on arXiv.</li>
-      <li><b>[Feb 2026]</b> <a href="https://openreview.net/pdf?id=nsUVWQiboS" target="_blank" rel="noopener">SyNC</a> preprint is out on arXiv.</li>
-      <li><b>[Sep 2025]</b> Awarded the <b>Best Thesis Presentation Award</b> at HUST.</li>
-      <li><b>[Jul 2025]</b> Began my AI Residency at FPT Software AI Center.</li>
-      <li><b>[Apr 2025]</b> <a href="https://github.com/pdt0609/Minion" target="_blank" rel="noopener">Minion</a> is accepted to <b>ACL 2025</b> (Main Conference).</li>
-      <li><b>[Dec 2024]</b> Awarded a research grant from <b>Naver</b> for the Hier-DETR project.</li>
-    </ul>
-
-    <h2>Preprints</h2>
-    <div class="pub">
-      <div class="title">ISRS-DETR: Detection-Guided Click Propagation for Remote Sensing Interactive Segmentation</div>
-      <div class="venue">Under review</div>
-      <div class="authors"><b>Thanh Duc Pham</b>, Anh Nguyen, Duong Duc Hieu, Minh-Tan Pham</div>
-    </div>
-    <div class="pub">
-      <div class="title">SyNC: Balancing Fidelity and Diversity of Synthetic Data Representations in CLIP-based Few-Shot Learning via Neural Collapse</div>
-      <div class="venue">Under review</div>
-      <div class="authors"><b>Thanh Duc Pham</b>, Lan-Cuong Nguyen, Dung D. Le, Minh-Tan Pham</div>
-    </div>
-    <div class="pub">
-      <div class="title"><a href="https://arxiv.org/abs/2506.08562" target="_blank" rel="noopener">Hier-DETR: Hierarchical Neural Collapse Detection Transformer for Class Incremental Object Detection</a></div>
-      <div class="venue">arXiv preprint, 2025 &middot; Naver Project</div>
-      <div class="authors"><b>Duc Thanh Pham</b>, Hong Dang Nguyen, Nhat Minh Nguyen Quoc, Linh Ngo Van, Sang Dinh Viet, Duc Anh Nguyen</div>
-    </div>
-
-    <h2>Publications</h2>
-    <div class="pub">
-      <div class="title"><a href="https://github.com/pdt0609/Minion" target="_blank" rel="noopener">Mitigating Non-Representative Prototypes and Representation Bias in Few-Shot Continual Relation Extraction</a></div>
-      <div class="venue">Proceedings of the ACL, 2025 (Main Conference)</div>
-      <div class="authors"><b>Thanh Duc Pham</b>, Nam Le Hai, Linh Ngo Van, Nguyen Thi Ngoc Diep, Sang Dinh, Thien Huu Nguyen</div>
-    </div>
-
-    <h2>Professional Services</h2>
-    <p>Conference Reviewer: AAAI 2025, ACL 2025, ICLR 2026, ICML 2026</p>
-
-  </main>
+<!-- ── Hero ─────────────────────────────────────────────────── -->
+<div class="hero">
+  <h1 class="hero-name"><strong>Thanh</strong> Duc Pham</h1>
 </div>
 
-<footer>© 2026 Thanh Duc Pham.</footer>
+<!-- ── Main ────────────────────────────────────────────────── -->
+<main>
+
+  <!-- About -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I am an AI Research Resident at <a href="https://www.facebook.com/aic.fsoft" target="_blank" rel="noopener">FPT Software AI Center</a>,
+          working under the supervision of <a href="https://scholar.google.com/citations?user=mnNKKlAAAAAJ&hl=fr" target="_blank" rel="noopener">Prof. Minh-Tan Pham</a>
+          (IRISA, Universit&eacute; Bretagne Sud). Previously, I was a Research Assistant at the Data Science Laboratory
+          (BKAI, HUST) advised by <a href="https://users.soict.hust.edu.vn/linhnv/" target="_blank" rel="noopener">Prof. Linh Ngo Van</a>.
+          I received my Bachelor's degree in Data Science and Artificial Intelligence from Hanoi University of
+          Science and Technology (HUST).
+        </p>
+        <p>
+          I'm always open to collaborations, discussions, and new opportunities.
+          Feel free to reach out if you're interested in my research or would like to discuss potential projects.
+        </p>
+        <p>
+          <strong>Research:</strong> My research focuses on developing principled approaches that enable AI systems
+          to learn and adapt continuously and efficiently, centered on DETR-based detection and segmentation models
+          and the theoretical study of Neural Collapse in representation learning.
+        </p>
+        <p>
+          <strong>1. Detection &amp; Interactive Segmentation.</strong>
+          I develop transformer-based detection models (DETR variants) for real-world settings such as remote
+          sensing imagery, including detection-guided interactive segmentation frameworks that leverage
+          inter-object correlations to propagate user clicks across same-class objects
+          (<a href="https://arxiv.org/pdf/2608.02468" target="_blank" rel="noopener">ISRS-DETR</a>).
+        </p>
+        <p>
+          <strong>2. Knowledge Distillation &amp; Continual Learning.</strong>
+          I investigate structured distillation strategies (Neural Collapse, prompts, prototypes) that preserve
+          downstream task representations while mitigating catastrophic forgetting, from class-incremental object
+          detection (<a href="https://arxiv.org/abs/2506.08562" target="_blank" rel="noopener">Hier-DETR</a>) to
+          few-shot learning with synthetic data (<a href="https://openreview.net/pdf?id=nsUVWQiboS" target="_blank" rel="noopener">SyNC</a>) and continual relation
+          extraction (<a href="https://github.com/pdt0609/Minion" target="_blank" rel="noopener">Minion</a>, ACL 2025).
+        </p>
+      </div>
+
+      <div class="profile-photo">
+        <img src="avatar.jpg" alt="Thanh Duc Pham" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Recent News -->
+  <section id="news">
+    <h2>Recent News</h2>
+    <table class="news-table">
+      <tbody>
+        <tr>
+          <td>Aug 2026</td>
+          <td>
+            <a href="https://arxiv.org/pdf/2608.02468" target="_blank" rel="noopener">ISRS-DETR: Detection-Guided Click Propagation for Remote Sensing Interactive Segmentation</a>
+            preprint is out on arXiv.
+          </td>
+        </tr>
+        <tr>
+          <td>Feb 2026</td>
+          <td>
+            <a href="https://openreview.net/pdf?id=nsUVWQiboS" target="_blank" rel="noopener">SyNC</a>
+            preprint is out on arXiv.
+          </td>
+        </tr>
+        <tr>
+          <td>Sep 2025</td>
+          <td>Awarded the <strong>Best Thesis Presentation Award</strong> at HUST.</td>
+        </tr>
+        <tr>
+          <td>Jul 2025</td>
+          <td>Began my AI Residency at FPT Software AI Center.</td>
+        </tr>
+        <tr>
+          <td>Apr 2025</td>
+          <td>
+            <a href="https://github.com/pdt0609/Minion" target="_blank" rel="noopener">Minion</a>
+            is accepted to <strong>ACL 2025</strong> (Main Conference).
+          </td>
+        </tr>
+        <tr>
+          <td>Dec 2024</td>
+          <td>Awarded a research grant from <strong>Naver</strong> for the Hier-DETR project.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications">
+    <h2>Publications</h2>
+    <ul class="pub-list">
+      <li class="pub-item">
+        <span class="pub-venue">ACL 2025</span>
+        <div class="pub-title">
+          Mitigating Non-Representative Prototypes and Representation Bias in Few-Shot Continual Relation Extraction
+        </div>
+        <div class="pub-authors">
+          <strong>Thanh Duc Pham</strong>, Nam Le Hai, Linh Ngo Van, Nguyen Thi Ngoc Diep, Sang Dinh, Thien Huu Nguyen
+        </div>
+        <div class="pub-conference">
+          Annual Meeting of the Association for Computational Linguistics, 2025 (Main Conference)
+        </div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://github.com/pdt0609/Minion" target="_blank" rel="noopener">Code</a>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <span class="pub-venue preprint">Preprint</span>
+        <div class="pub-title">
+          ISRS-DETR: Detection-Guided Click Propagation for Remote Sensing Interactive Segmentation
+        </div>
+        <div class="pub-authors">
+          <strong>Thanh Duc Pham</strong>, Anh Nguyen, Duong Duc Hieu, Minh-Tan Pham
+        </div>
+        <div class="pub-conference">
+          Under Review, 2026
+        </div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://arxiv.org/pdf/2608.02468" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <span class="pub-venue preprint">Preprint</span>
+        <div class="pub-title">
+          SyNC: Balancing Fidelity and Diversity of Synthetic Data Representations in CLIP-based Few-Shot Learning via Neural Collapse
+        </div>
+        <div class="pub-authors">
+          <strong>Thanh Duc Pham</strong>, Lan-Cuong Nguyen, Dung D. Le, Minh-Tan Pham
+        </div>
+        <div class="pub-conference">
+          Under Review, 2026
+        </div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://openreview.net/pdf?id=nsUVWQiboS" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </li>
+
+      <li class="pub-item">
+        <span class="pub-venue preprint">Preprint</span>
+        <div class="pub-title">
+          Hier-DETR: Hierarchical Neural Collapse Detection Transformer for Class Incremental Object Detection
+        </div>
+        <div class="pub-authors">
+          <strong>Duc Thanh Pham</strong>, Hong Dang Nguyen, Nhat Minh Nguyen Quoc, Linh Ngo Van, Sang Dinh Viet, Duc Anh Nguyen
+        </div>
+        <div class="pub-conference">
+          arXiv preprint, 2025 &middot; Naver Project
+        </div>
+        <div class="pub-links">
+          <a class="pub-link" href="https://arxiv.org/abs/2506.08562" target="_blank" rel="noopener">PDF</a>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+</main>
 
 </body>
 </html>
